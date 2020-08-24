@@ -2,13 +2,13 @@
 pipeline {
     agent any
             stages {    
-             stage("List S3 buckets") {
-                   steps{
-                  withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                  AWS("--region=eu-east-1 elb deregister-instances-from-load-balancer --load-balancer-name nouman-classic-lb --instances i-0633d6cd62185c1b9")
-    }
-             }
-  }
+//              stage("List S3 buckets") {
+//                    steps{
+//                   withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+//                   AWS("--region=eu-east-1 elb deregister-instances-from-load-balancer --load-balancer-name nouman-classic-lb --instances i-0633d6cd62185c1b9")
+//     }
+//              }
+//   }
              stage('SCM checkout') {
                   steps {
                         git url: 'https://github.com/Nouman72884/flask-examples.git'
