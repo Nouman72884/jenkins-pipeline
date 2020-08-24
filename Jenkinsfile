@@ -1,11 +1,13 @@
 @Library('github.com/releaseworks/jenkinslib') _
 pipeline {
     agent any
-            stages {
+            stages {    
              stage("List S3 buckets") {
+                   steps{
                   withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                   AWS("--region=eu-west-1 elb deregister-instances-from-load-balancer --load-balancer-name nouman-classic-lb --instances i-0633d6cd62185c1b9")
     }
+             }
   }
              stage('SCM checkout') {
                   steps {
