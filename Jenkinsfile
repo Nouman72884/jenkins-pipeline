@@ -1,6 +1,11 @@
 pipeline {
     agent any
             stages {
+             stage('SCM checkout') {
+                  steps {
+                        git url: 'https://github.com/Nouman72884/flask-examples.git'
+                        }
+             }
              stage('preparation') {
                    steps {
                          sh 'sudo apt-get install -y unzip'
