@@ -1,11 +1,6 @@
 pipeline {
     agent any
             stages {
-            stage('SCM checkout') {
-                  steps {
-                        git url: 'https://github.com/Nouman72884/flask-examples.git'
-                        }
-             }
              stage('preparation') {
                    steps {
                          sh 'curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"'
