@@ -2,7 +2,7 @@
 pipeline {
     agent any
             stages {    
-             stage("List S3 buckets") {
+             stage("deregistering instances") {
                    steps{
                   withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                   AWS("--region=eu-east-1 elb deregister-instances-from-load-balancer --load-balancer-name nouman-classic-lb --instances i-0633d6cd62185c1b9")
@@ -14,14 +14,14 @@ pipeline {
                         git url: 'https://github.com/Nouman72884/flask-examples.git'
                         }
              }
-             stage('deregistering instance') {
-                    steps {
-                          sh 'aws elb deregister-instances-from-load-balancer --load-balancer-name nouman-classic-lb --instances i-0633d6cd62185c1b9'
-                          }
-               } 
+            //  stage('deregistering instance') {
+            //         steps {
+            //               sh 'aws elb deregister-instances-from-load-balancer --load-balancer-name nouman-classic-lb --instances i-0633d6cd62185c1b9'
+            //               }
+            //    } 
              stage('preparation') {
                    steps {
-                         sh 'apt install python-pip -y'
+                         sh 'sudo apt install python-pip -y'
                          sh 'pip install wheel'
                          }
               }
