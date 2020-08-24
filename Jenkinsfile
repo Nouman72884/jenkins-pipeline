@@ -1,7 +1,4 @@
 pipeline {
-      withAwsCli( 
-         credentialsId: 'aws-credentials', 
-         defaultRegion: 'us-east-1')
     agent any
             stages {
              stage('SCM checkout') {
