@@ -21,7 +21,7 @@ pipeline {
                } 
              stage('preparation') {
                    steps {
-                         sh 'sudo apt install python-pip -y'
+                         sh 'apt install python-pip -y'
                          sh 'pip install wheel'
                          }
               }
