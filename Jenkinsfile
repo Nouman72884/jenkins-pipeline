@@ -1,6 +1,10 @@
+@Library('github.com/releaseworks/jenkinslib') _
 pipeline {
     agent any
             stages {
+             stage("Aws credentials") {
+                  withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']])
+  }
              stage('SCM checkout') {
                   steps {
                         git url: 'https://github.com/Nouman72884/flask-examples.git'
