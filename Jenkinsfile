@@ -10,12 +10,14 @@ pipeline {
              }
              stage('get instance id') {
                    steps {
+                         script {
                          //sh 'instance_id=$(aws ec2 describe-instances --filters Name=tag:Name,Values=nouman-ec2 --query Reservations[0].Instances[0].InstanceId --region=us-east-1 --output text)'
                          instance_id=sh(
                                script: 'aws ec2 describe-instances --filters Name=tag:Name,Values=nouman-ec2 --query Reservations[0].Instances[0].InstanceId --region=us-east-1 --output text',
                                returnStdout: true,
                           )
                } 
+                   }
              }
              stage('deregistering instances') {
                     steps {
