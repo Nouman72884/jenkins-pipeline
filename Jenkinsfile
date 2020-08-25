@@ -26,10 +26,11 @@ pipeline {
              stage('get instance id') {
                    steps {
                          script {
-                         instance_id=sh(
-                               script:"aws ec2 describe-instances --filters Name=tag:Name,Values=nouman-ec2 --query Reservations[0].Instances[0].InstanceId --region=us-east-1 --output text",
-                               returnStdout: true,
-                         )
+                         def instance_id = COMMON.SH_WITH_RETRIES("aws ec2 describe-instances --filters Name=tag:Name,Value=nouman-ec2 --query Reservations[0].Instances[0].InstanceId --output text")
+                        //  instance_id=sh(
+                        //        script:"aws ec2 describe-instances --filters Name=tag:Name,Values=nouman-ec2 --query Reservations[0].Instances[0].InstanceId --region=us-east-1 --output text",
+                        //        returnStdout: true,
+                        //  )
                          echo "Hello ${instance_id}"     
                } 
                    }
