@@ -1,4 +1,5 @@
 // @Library('github.com/releaseworks/jenkinslib') _
+instance_id=''
 pipeline {
     agent any
             stages {    
