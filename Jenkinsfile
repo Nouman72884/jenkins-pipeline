@@ -52,7 +52,7 @@ pipeline {
              stage('registering instance') {
                     steps {
                         //withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
-                          sh 'aws elb register-instances-with-load-balancer --load-balancer-name nouman-classic-lb --instances i-0a2d0c68c3a8583dd'
+                          sh 'aws elb register-instances-with-load-balancer --load-balancer-name nouman-classic-lb --instances i-0a2d0c68c3a8583dd --region=us-east-1'
                           //}
                }  
              }
