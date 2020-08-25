@@ -40,7 +40,7 @@ pipeline {
                           (configName: 'webserver',
                            transfers: [sshTransfer(
                            excludes: 'jenkinsfile,pipeline.groovy',
-                           execCommand: 'sudo apt-get update -y:sudo apt-get install python-pip -y;cd /tmp/tmp/;pip install *.whl;sudo apt install python3-flask -y;sudo apt-get install at;sudo systemctl start atd;sudo systemctl enable atd;cd 01-hello-world/;export FLASK_APP=hello.py;killall flask;echo "flask run --host=0.0.0.0" | at -m now',
+                           execCommand: 'sudo apt-get update -y;sudo apt-get install python-pip -y;cd /tmp/tmp/;pip install *.whl;sudo apt install python3-flask -y;sudo apt-get install at;sudo systemctl start atd;sudo systemctl enable atd;cd 01-hello-world/;export FLASK_APP=hello.py;killall flask;echo "flask run --host=0.0.0.0" | at -m now',
                            execTimeout: 350000,
                            flatten: false,
                            makeEmptyDirs: true,
