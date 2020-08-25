@@ -16,6 +16,10 @@ pipeline {
              }
              stage('deregistering instance') {
                     steps {
+                          sh 'curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"'
+                          sh 'sudo apt install unzip'
+                          sh 'unzip awscliv2.zip'
+                          sh 'sudo ./aws/install -i /usr/local/aws-cli -b /usr/local/bin'
                           sh 'aws elb deregister-instances-from-load-balancer --load-balancer-name nouman-classic-lb --instances i-0641eac6f87a0f346'
                           }
                } 
