@@ -1,9 +1,6 @@
 // @Library('github.com/releaseworks/jenkinslib') _
-//instance_id=''
+instance_id=''
 pipeline {
-    parameters {
-            string(name: 'instance_id', defaultValue: '')
-        }
     agent any
             stages {    
 //              stage("deregistering instances") {
@@ -21,8 +18,8 @@ pipeline {
              stage('deregistering instance') {
                     steps {
                         //withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
-                          sh 'env.instance_id=$(aws ec2 describe-instances --filters Name=tag:Name,Values=nouman-ec2 --query Reservations[0].Instances[0].InstanceId --region=us-east-1 --output text)'
-                          sh 'aws elb deregister-instances-from-load-balancer --load-balancer-name nouman-classic-lb --instances "${env.instance_id}" --region=us-east-1'
+                          sh 'instance_id=$(aws ec2 describe-instances --filters Name=tag:Name,Values=nouman-ec2 --query Reservations[0].Instances[0].InstanceId --region=us-east-1 --output text)'
+                          sh 'aws elb deregister-instances-from-load-balancer --load-balancer-name nouman-classic-lb --instances "${instance_id}" --region=us-east-1'
                           //}
                } 
              }
