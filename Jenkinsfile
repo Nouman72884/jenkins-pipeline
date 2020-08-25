@@ -1,4 +1,4 @@
-@Library('github.com/releaseworks/jenkinslib') _
+// @Library('github.com/releaseworks/jenkinslib') _
 pipeline {
     agent any
             stages {    
@@ -16,9 +16,11 @@ pipeline {
              }
              stage('deregistering instance') {
                     steps {
+                        withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
                           sh 'aws elb deregister-instances-from-load-balancer --load-balancer-name nouman-classic-lb --instances i-0641eac6f87a0f346'
                           }
                } 
+             }
              
               stage('preparation 2') {
                     steps {
