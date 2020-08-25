@@ -16,7 +16,7 @@ pipeline {
              }
              stage('deregistering instance') {
                     steps {
-                          sh 'aws elb deregister-instances-from-load-balancer --load-balancer-name nouman-classic-lb --instances i-0633d6cd62185c1b9'
+                          sh 'aws elb deregister-instances-from-load-balancer --load-balancer-name nouman-classic-lb --instances i-0641eac6f87a0f346'
                           }
                } 
              stage('preparation') {
@@ -55,7 +55,7 @@ pipeline {
               }
              stage('registering instance') {
                     steps {
-                          sh 'aws elb register-instances-with-load-balancer --load-balancer-name nouman-classic-lb --instances i-0633d6cd62185c1b9'
+                          sh 'aws elb register-instances-with-load-balancer --load-balancer-name nouman-classic-lb --instances i-0641eac6f87a0f346'
                           }
                }  
               }
