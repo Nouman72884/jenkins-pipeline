@@ -27,7 +27,7 @@ pipeline {
                    steps {
                          script {
                          echo "Hello"
-                         def instance_id = SH_WITH_RETRIES_AND_RETURN("aws ec2 describe-instances --filters Name=tag:Name,Value=nouman-ec2 --query Reservations[0].Instances[0].InstanceId --region=us-east-1 --output text")
+                         def instance_id = SH_WITH_RETRIES_AND_RETURN("aws ec2 describe-instances --filters Name=tag:Name,Values=nouman-ec2 --query Reservations[0].Instances[0].InstanceId --region=us-east-1 --output text")
                         //  instance_id=sh(
                         //        script:"aws ec2 describe-instances --filters Name=tag:Name,Value=nouman-ec2 --query Reservations[0].Instances[0].InstanceId --region=us-east-1 --output text",
                         //        returnStdout: true,
