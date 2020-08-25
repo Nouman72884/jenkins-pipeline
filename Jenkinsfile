@@ -17,7 +17,7 @@ pipeline {
              stage('deregistering instance') {
                     steps {
                         //withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
-                          sh 'instance_id=$(aws ec2 describe-instances --filters Name=tag:Name,Values=nouman-ec2 --query Reservations[0].Instances[0].InstanceId --output text)'
+                          sh 'instance_id=$(aws ec2 describe-instances --filters Name=tag:Name,Values=nouman-ec2 --query Reservations[0].Instances[0].InstanceId --region=us-east-1 --output text)'
                           sh 'aws elb deregister-instances-from-load-balancer --load-balancer-name nouman-classic-lb --instances $instance_id --region=us-east-1'
                           //}
                } 
@@ -53,7 +53,7 @@ pipeline {
              stage('registering instance') {
                     steps {
                         //withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
-                          sh 'instance_id=$(aws ec2 describe-instances --filters Name=tag:Name,Values=nouman-ec2 --query Reservations[0].Instances[0].InstanceId --output text)'
+                          sh 'instance_id=$(aws ec2 describe-instances --filters Name=tag:Name,Values=nouman-ec2 --query Reservations[0].Instances[0].InstanceId --region=us-east-1 --output text)'
                           sh 'aws elb register-instances-with-load-balancer --load-balancer-name nouman-classic-lb --instances $instance_id --region=us-east-1'
                           //}
                }  
