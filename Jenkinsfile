@@ -11,7 +11,6 @@ pipeline {
              stage('get instance id') {
                    steps {
                          script {
-                         //sh 'instance_id=$(aws ec2 describe-instances --filters Name=tag:Name,Values=nouman-ec2 --query Reservations[0].Instances[0].InstanceId --region=us-east-1 --output text)'
                          instance_id=sh(
                                script:"aws ec2 describe-instances --filters Name=tag:Name,Values=nouman-ec2 --query Reservations[0].Instances[0].InstanceId --region=us-east-1 --output text",
                                returnStdout: true,
@@ -22,7 +21,6 @@ pipeline {
              stage('deregistering instances') {
                     steps {
                           echo "${instance_id}"
-                          //sh 'instance_id=$(aws ec2 describe-instances --filters Name=tag:Name,Values=nouman-ec2 --query Reservations[0].Instances[0].InstanceId --region=us-east-1 --output text)'
                           sh "aws elb deregister-instances-from-load-balancer --load-balancer-name nouman-classic-lb --region us-east-1 --instances  ${instance_id} "
                           }
                }
@@ -56,7 +54,6 @@ pipeline {
               }
              stage('registering instance') {
                     steps {
-                          //sh 'instance_id=$(aws ec2 describe-instances --filters Name=tag:Name,Values=nouman-ec2 --query Reservations[0].Instances[0].InstanceId --region=us-east-1 --output text)'
                           sh "aws elb register-instances-with-load-balancer --load-balancer-name nouman-classic-lb --region=us-east-1 --instances ${instance_id} "
                }  
              }
