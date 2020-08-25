@@ -21,7 +21,7 @@ pipeline {
              }
              stage('deregistering instances') {
                     steps {
-                          sh 'aws elb deregister-instances-from-load-balancer --load-balancer-name nouman-classic-lb --instances --var='${instance_id}' --region=us-east-1'
+                          sh 'aws elb deregister-instances-from-load-balancer --load-balancer-name nouman-classic-lb --instances ${instance_id} --region=us-east-1'
                           }
                }
              
