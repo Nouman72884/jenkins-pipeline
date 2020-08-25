@@ -1,5 +1,20 @@
-// @Library('github.com/releaseworks/jenkinslib') _
-def instance_id
+def SH_WITH_RETRIES_AND_RETURN( String cmd, Integer retries=5, Integer sleepSeconds=10  ){
+  def retriesCount = 0
+  echo "sh[retries=${retries}]: ${cmd}"
+  try {
+    retry( retries ){
+      retriesCount = retriesCount+1
+      echo "attempt ${retriesCount}/$retries"
+      if( retriesCount > 1 ){
+        sleep sleepSeconds
+        sleepSeconds = sleepSeconds+1
+      }
+      return sh( returnStdout: true, script: "${cmd}").trim()
+    }
+  } catch(e) {
+    throw e
+  }
+}
 pipeline {
     agent any
             stages {    
@@ -14,7 +29,8 @@ pipeline {
                          instance_id=sh(
                                script:"aws ec2 describe-instances --filters Name=tag:Name,Values=nouman-ec2 --query Reservations[0].Instances[0].InstanceId --region=us-east-1 --output text",
                                returnStdout: true,
-                         )     
+                         )
+                         echo "Hello ${instance_id}"     
                } 
                    }
              }
